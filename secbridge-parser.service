@@ -1,0 +1,20 @@
+[Unit]
+Description=SecBridge — SangforNGAF Parser
+Documentation=https://github.com/Teraz1/secbridge
+After=network.target scalyr-agent-2.service
+Wants=scalyr-agent-2.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python3 /opt/secbridge/sangfor_parser.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=secbridge-parser
+MemoryMax=128M
+CPUQuota=10%
+
+[Install]
+WantedBy=multi-user.target
